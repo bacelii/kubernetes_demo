@@ -1,0 +1,13 @@
+FROM python:3.7 
+LABEL maintainer="Brendan"
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends apt-utils
+RUN apt-get -y update && \
+    apt-get -y install graphviz 
+
+RUN pip3 install scipy
+RUN mkdir -p /src
+ADD wait.py /src/wait.py
+
+#CMD ["/bin/echo", "Hello world"]
+ENTRYPOINT python3 /src/wait.py

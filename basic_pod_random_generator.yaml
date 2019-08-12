@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: random-generator-pod-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: the-random
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: the-random
+    spec:
+      containers:
+      - name: random-generator
+        image: celiib/random_generator:latest
